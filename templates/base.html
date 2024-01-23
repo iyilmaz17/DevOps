@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>DevOps</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Benim Günüm</h1>
+    
+        <form action="/add" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Yapılacak iş</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Eklemek istediğiniz işi yazın...">
+            </div>
+            <button type="submit" class="btn btn-primary">Ekle</button>
+        </form>
+    
+        <hr>
+    
+        {% for todo in todo_list %}
+            <div class="card mb-3 container">
+                <div class="card-body">
+                    <h5 class="card-title">{{ todo.id }} | {{ todo.title }}</h5>
+    
+                    {% if todo.complete == False %}
+                        <span class="badge bg-secondary">Yapılmadı</span>
+                    {% else %}
+                        <span class="badge bg-success">Yapıldı</span>
+                    {% endif %}
+    
+                    <a href="/update/{{ todo.id }}" class="btn btn-primary">Durumu değiştir</a>
+                    <a href="/delete/{{ todo.id }}" class="btn btn-danger">İşi sil</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+    <!-- Bootstrap JS and Popper.js (Optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>
