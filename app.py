@@ -2,15 +2,20 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ismail1@mysql-container/todoapp'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ismail1@localhost/todoapp'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ismail1@127.0.0.1:3306/todoapp'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ismail1@172.17.0.2:3306/todoapp'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:ismail1@mysql-container/todoapp'
+
+connection_config = {
+    'user': 'root',
+    'password': 'ismail1',
+    'host': '34.122.11.7',
+    'database': 'todoapp',
+    'port': 3306,
+    'unix_socket': '/cloudsql/cloudcomputing-407914:us-central1:devops'
+}
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{connection_config['user']}:{connection_config['password']}@{connection_config['host']}:{connection_config['port']}/{connection_config['database']}"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
