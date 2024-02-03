@@ -5,11 +5,11 @@ app = Flask(__name__)
 
 connection_config = {
     'user': 'root',
-    'password': 'ismail1',
-    'host': '34.122.11.7',
+    'password': 'ismail123',
+    'host': '104.154.49.160',
     'database': 'todoapp',
     'port': 3306,
-    'unix_socket': '/cloudsql/cloudcomputing-407914:us-central1:devops'
+    'unix_socket': '/cloudsql/cloudcomputing-407914:us-central1:devops-mysql'
 }
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{connection_config['user']}:{connection_config['password']}@{connection_config['host']}:{connection_config['port']}/{connection_config['database']}"
